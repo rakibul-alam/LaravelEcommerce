@@ -1,5 +1,7 @@
 <?php
 
+// use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
@@ -24,9 +26,16 @@ Route::get('/test', function () {
     app()->make('first_service_provider');
 });
 
-Route::get('/test-one', function () {
+Route::get('/test-session', function (Request $request) {
    
-    return view('welcome');
+    // session(['name'=>'Data']);
+    $request->session()->put('age','28');
+
+});
+
+Route::get('/all-session', function(Request $request){
+//    return $request->session()->all();
+   $request->session()->flush();
 });
 
 
