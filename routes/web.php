@@ -15,8 +15,24 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 */
 
 Route::get('/', function () {
+    // dd(app());
     return view('welcome');
 });
+
+Route::get('/test', function () {
+  
+    app()->make('first_service_provider');
+});
+
+Route::get('/test-one', function () {
+   
+    return view('welcome');
+});
+
+
+// Route::get('/{roll}', function($roll){
+//     return "my roll is $roll";
+// });
 
 // Web User Login/Registration Route Controller
 Auth::routes();
