@@ -4,7 +4,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-
+use Illuminate\Routing\Controller;
+use Illuminate\Foundation\Auth\VerifiesEmails;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,4 +54,8 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
+Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/password/change', [App\Http\Controllers\HomeController::class, 'password_change'])->name('password.change')->middleware('verified');
