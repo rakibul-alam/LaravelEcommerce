@@ -29,4 +29,9 @@ class HomeController extends Controller
     public function password_change(){
         return view('password_change');
     }
+
+    public function changePassword()
+    {
+   return view('change-password');
+    }
 }

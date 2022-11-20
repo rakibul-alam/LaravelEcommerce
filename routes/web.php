@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Auth\VerificationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +42,16 @@ Route::get('/all-session', function(Request $request){
 });
 
 
+
+
+// class crud route
+Route::get('class', [App\Http\Controllers\Admin\ClassController::class, 'index'])->name('class.index');
+
+
+
+
+
+
 // Route::get('/{roll}', function($roll){
 //     return "my roll is $roll";
 // });
@@ -48,14 +60,21 @@ Route::get('/all-session', function(Request $request){
 Auth::routes();
 // Auth::routes(['verify'=>true]);
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
  
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+//     return redirect('/home');
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+
+
 
 Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 
+// Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/password/change', [App\Http\Controllers\HomeController::class, 'password_change'])->name('password.change')->middleware('verified');
+Route::get('/password/change', [App\Http\Controllers\VerificationController::class, 'password_change'])->name('password.change')->middleware('verified');
+
+
+// change password
+Route::get('/change-password', [App\Http\Controllers\HomeController::class, 'changePassword'])->name('change-password');
