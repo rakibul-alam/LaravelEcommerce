@@ -58,13 +58,13 @@ Route::get('class', [App\Http\Controllers\Admin\ClassController::class, 'index']
 
 // Web User Login/Registration Route Controller
 Auth::routes();
-// Auth::routes(['verify'=>true]);
+Auth::routes(['verify'=>true]);
 
-// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//     $request->fulfill();
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
  
-//     return redirect('/home');
-// })->middleware(['auth', 'signed'])->name('verification.verify');
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
 
 
 
